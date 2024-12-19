@@ -1,0 +1,47 @@
+/* styles.css */
+
+/* Mengatur warna latar belakang dan teks */
+body {
+    background-color: #f0f8ff; /* Warna latar belakang biru muda */
+    color: #003366; /* Warna teks biru gelap */
+    font-family: Arial, sans-serif; /* Mengatur font */
+}
+
+/* Mengatur judul */
+h1, h2, h3, h4, h5, h6 {
+    color: #00509e; /* Warna judul biru */
+}
+
+/* Mengatur tautan */
+a {
+    color: #007bff; /* Warna tautan biru */
+    text-decoration: none; /* Menghilangkan garis bawah */
+}
+
+a:hover {
+    text-decoration: underline; /* Garis bawah saat hover */
+}
+
+/* Mengatur tabel */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #007bff; /* Warna border tabel biru */
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #00509e; /* Warna latar belakang header tabel */
+    color: white; /* Warna teks header tabel */
+}
+
+/* Mengatur paragraf */
+p {
+    line-height: 1.6; /* Jarak antar baris */
+}
+
+/* Mengatur elemen lainnya sesuai kebutuhan */

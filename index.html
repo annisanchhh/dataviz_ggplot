@@ -2634,6 +2634,7 @@ margin-left: 2em;
 }
 </style>
 
+<style type="text/css">body {background-color: #f0f8ff; color: #003366; font-family: Arial, sans-serif; }h1, h2, h3, h4, h5, h6 {color: #00509e; }a {color: #007bff; text-decoration: none; }a:hover {text-decoration: underline; }table {border-collapse: collapse;width: 100%;}th, td {border: 1px solid #007bff; padding: 8px;text-align: left;}th {background-color: #00509e; color: white; }p {line-height: 1.6; }</style>
 
 
 
@@ -2812,6 +2813,19 @@ syntax for authoring HTML, PDF, and MS Word documents <span class="citation">(A.
 generated that includes both content as well as the output of any
 embedded R code chunks within the document. You can embed an R code
 chunk like this:</p>
+<pre class="r"><code>library(readr)
+iris &lt;- read_csv(&quot;iris.csv&quot;)</code></pre>
+<pre><code>## Rows: 150 Columns: 5
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): variety
+## dbl (4): sepal.length, sepal.width, petal.length, petal.width
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>View(iris)</code></pre>
+<pre class="r"><code>print (&quot;hallo word&quot;)</code></pre>
+<pre><code>## [1] &quot;hallo word&quot;</code></pre>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
