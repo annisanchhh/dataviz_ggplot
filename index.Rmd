@@ -6,7 +6,7 @@ output:
   html_document:
     css: style.css
     theme: flatly
-    higlight: zenburn
+    higlight: tango
     toc: true
     toc_float:
       collapsed: true
@@ -107,18 +107,32 @@ ggplot(data, aes(x = x, y = y, color = grup)) +
 # 3. Mengolah data dari file CSV
 Sebelum membaca data, pastikan file yang akan dibaca berada di lokasi yang benar dan formatnya sesuai, seperti CSV atau Excel. Tentukan direktori kerja menggunakan setwd() jika perlu, dan pastikan paket yang dibutuhkan, seperti readr untuk CSV, sudah terinstal dan diload. Periksa struktur file, pastikan data terorganisir dengan baik, dan cek nama serta tipe kolom untuk memastikan konsistensi. Setelah itu, baca data dengan fungsi yang tepat dan periksa beberapa baris awal untuk memastikan semuanya terbaca dengan benar.
 
-## 3.1 membaca data csv
+## 3.1 Membaca Data CSV
 ```{r}
 library(readr)
-lizards <- read_csv("lizards.csv")
+lizards <- suppressMessages(read_csv("lizards.csv"))
 ```
+
+
+![data lizard](D:/kuliah/semester 3/visualisasi data/dataviz_ggplot/images.png)
+
+## 3.2 Mengolah data total_length dan weight 
+karna kita akan menggabungkan dua kolom maka kita buat, x = total_length dan y = weight 
 
 ```{r}
 library(ggplot2) 
+
+#membuat plot titik
 ggplot(lizards, aes(x = total_length, y = weight)) + 
   geom_point() +
+  
+#menambahkan judul plot dan sumbu 
   labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
+
 ```
+
+
+
 
 
 
