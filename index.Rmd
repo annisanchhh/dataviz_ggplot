@@ -1,6 +1,6 @@
 ---
 title: "My Document"
-author: "Deden Istiawan-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+author: "Annisa Nur Cahyani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -29,8 +29,34 @@ library(ggplot2)
 # buat data frame contoh
 data <- data.frame(x = rnorm(100), y = rnorm(100))
 # buat plot titik
-ggplot(data, aes(x = x, y = y)) + geom_point()
+ggplot(data, aes(x = x, y = y)) + 
+  geom_point() +
+  labs(title = "Plot titik" , x = "Sumbu x", y = "sumbu y ") + theme_classic()
 ```
+```{r}
+# buat data frame contoh dengan variable kategorik
+data <- data.frame(x = rnorm(100), y = rnorm(100), grup = sample(c("A","B","C","D"), 100,replace = TRUE))
+# buat plot titik dengan faceting
+ggplot(data, aes(x = x, y = y, color = grup)) + 
+  geom_point(size = 2) +
+  facet_wrap(~ grup) +
+  scale_color_manual(values = c("A" = "red", "B" = "blue", "C" = "pink", "D" = "green")) + 
+  theme_minimal() +
+  labs(color = "Grup")
+```
+```{r}
+library(readr)
+lizards <- read_csv("lizards.csv")
+view(lizards)
+```
+```{r}
+library(ggplot2) 
+ggplot(lizards, aes(x = total_length, y = weight)) + 
+  geom_point() +
+  labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
+```
+
+
 
 
 # R Markdown
