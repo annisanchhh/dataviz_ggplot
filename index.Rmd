@@ -24,6 +24,15 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(ggplot2) 
+# buat data frame contoh
+data <- data.frame(x = rnorm(100), y = rnorm(100))
+# buat plot titik
+ggplot(data, aes(x = x, y = y)) + geom_point()
+```
+
+
 # R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
