@@ -1,5 +1,5 @@
 ---
-title: "My Document"
+title: "Visualisasi Data menggunakan ggplot2"
 author: "Annisa Nur Cahyani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
@@ -20,40 +20,99 @@ body{
 text-align: justify}
 </style>
 ```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# 1. Pengantar ggplot2
+R adalah bahasa pemrograman yang banyak digunakan untuk analisis data dan statistik. Salah satu kekuatan utama R terletak pada kemampuannya dalam membuat visualisasi data yang fleksibel dan informatif. Di antara berbagai paket visualisasi yang tersedia, ggplot2 merupakan yang paling populer karena memanfaatkan konsep Grammar of Graphics untuk menghasilkan grafik yang terstruktur dan mudah dimodifikasi.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Fungsi utama ggplot2 adalah memungkinkan pengguna untuk membuat berbagai jenis grafik, seperti scatter plot, bar chart, line chart, dan histogram, dengan sintaks yang intuitif. ggplot2 juga menawarkan fleksibilitas tinggi dalam menyesuaikan elemen visual, seperti warna, bentuk, ukuran, dan tema, sehingga grafik dapat disesuaikan dengan kebutuhan presentasi atau analisis.
 
+Tujuan ggplot2 adalah mempermudah proses eksplorasi data melalui visualisasi yang mendalam dan informatif. Grafik yang dihasilkan membantu pengguna memahami pola, tren, dan hubungan dalam data, yang esensial untuk analisis mendalam atau pengambilan keputusan. Dengan integrasi sempurna dalam ekosistem R, ggplot2 menjadi alat yang esensial bagi peneliti, analis data, dan profesional di berbagai bidang.
+
+
+
+# 2. Dasar-dasar ggplot2
+ggplot2 adalah salah satu paket visualisasi data di R yang menggunakan pendekatan Grammar of Graphics. Dengan ggplot2, pengguna dapat membangun grafik secara bertahap dengan menambahkan komponen-komponen tertentu. Berikut adalah dasar-dasar penting yang perlu dipahami:
+
+## 2.1 Dataset
+Data yang akan divisualisasikan harus sudah tersedia dalam bentuk data frame atau tibble. Data ini harus memiliki variabel-variabel yang relevan untuk divisualisasikan, seperti variabel numerik untuk sumbu x dan y atau variabel kategorik untuk grup atau warna.
+
+## 2.2 Paket ggplot2
+Pastikan paket ggplot2 telah diinstal dan di-load dalam lingkungan R. Jika belum, instalasi dapat dilakukan dengan: install.packages("ggplot2), kemudian di aktifkan :
 ```{r}
 library(ggplot2) 
-# buat data frame contoh
-data <- data.frame(x = rnorm(100), y = rnorm(100))
-# buat plot titik
-ggplot(data, aes(x = x, y = y)) + 
-  geom_point() +
-  labs(title = "Plot titik" , x = "Sumbu x", y = "sumbu y ") + theme_classic()
 ```
+
+## 2.3.Membuat data frame
+membuat dua kolom: x dan y. Kedua kolom ini berisi data acak yang dihasilkan menggunakan fungsi rnorm(100), yang menghasilkan 100 angka acak yang terdistribusi normal.
+```{r}
+data <- data.frame(x = rnorm(100), y = rnorm(100))
+```
+
+## 2.4.Membuat plot,judul dan tema
+membuat mengunakan ggplot.Data yang digunakan adalah data frame data, dan kita menetapkan sumbu x untuk kolom x dan sumbu y untuk kolom y.serta sebuah judul (Plot titik). Tema plot menggunakan theme_classic() yang memberikan tampilan yang lebih sederhana dan klasik.
+
+```{r}
+print(ggplot(data, aes(x = x, y = y)) + 
+        
+#menentukat plot titik      
+geom_point() +
+  
+#menambahkan judul plot dan sumbu        
+labs(title = "Plot titik", x = "Sumbu x", y = "Sumbu y") +
+  
+#memilih tema  
+theme_classic())
+```
+
+
+
+
+
+
+## 2.5 Faceting
+Fitur ini memungkinkan pembuatan subplot berdasarkan kategori dalam data. Dua fungsi utama:
+
+  1.facet_wrap(): Membuat subplot satu dimensi.
+  
+  2.facet_grid(): Membuat subplot dua dimensi berdasarkan kombinasi dua variabel.
+
+
 ```{r}
 # buat data frame contoh dengan variable kategorik
 data <- data.frame(x = rnorm(100), y = rnorm(100), grup = sample(c("A","B","C","D"), 100,replace = TRUE))
+
 # buat plot titik dengan faceting
-ggplot(data, aes(x = x, y = y, color = grup)) + 
+ggplot(data, aes(x = x, y = y, color = grup)) +
+  
+#Menambahkan titik pada plot dengan ukuran titik yang lebih besar (ukuran 2).
   geom_point(size = 2) +
+  
+#Membagi plot menjadi beberapa sub-plot berdasarkan kategori yang ada di kolom grup. Setiap kategori (A, B, C, D) akan memiliki sub-plotnya sendiri.
   facet_wrap(~ grup) +
+  
+#Menentukan warna manual untuk masing-masing kategori grup. "A" diwarnai merah, "B" biru, "C" pink, dan "D" hijau.
   scale_color_manual(values = c("A" = "red", "B" = "blue", "C" = "pink", "D" = "green")) + 
+  
+# mengatur tema
   theme_minimal() +
+  
+#Menambahkan label pada legenda warna yang menjelaskan bahwa warna mewakili kategori "Grup".
   labs(color = "Grup")
 ```
+
+# 3. Mengolah data dari file CSV
+Sebelum membaca data, pastikan file yang akan dibaca berada di lokasi yang benar dan formatnya sesuai, seperti CSV atau Excel. Tentukan direktori kerja menggunakan setwd() jika perlu, dan pastikan paket yang dibutuhkan, seperti readr untuk CSV, sudah terinstal dan diload. Periksa struktur file, pastikan data terorganisir dengan baik, dan cek nama serta tipe kolom untuk memastikan konsistensi. Setelah itu, baca data dengan fungsi yang tepat dan periksa beberapa baris awal untuk memastikan semuanya terbaca dengan benar.
+
+## 3.1 membaca data csv
 ```{r}
 library(readr)
 lizards <- read_csv("lizards.csv")
-view(lizards)
 ```
+
 ```{r}
 library(ggplot2) 
 ggplot(lizards, aes(x = total_length, y = weight)) + 
