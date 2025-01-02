@@ -6,7 +6,7 @@ output:
   html_document:
     css: style.css
     theme: flatly
-    higlight: tango
+    higlight: zenburn
     toc: true
     toc_float:
       collapsed: true
@@ -113,7 +113,6 @@ library(readr)
 lizards <- suppressMessages(read_csv("lizards.csv"))
 ```
 
-
 ![data lizard](D:/kuliah/semester 3/visualisasi data/dataviz_ggplot/images.png)
 
 ## 3.2 Mengolah data total_length dan weight 
@@ -130,9 +129,6 @@ ggplot(lizards, aes(x = total_length, y = weight)) +
   labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
 
 ```
-
-
-
 
 
 
