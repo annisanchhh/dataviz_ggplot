@@ -115,56 +115,80 @@ lizards <- suppressMessages(read_csv("lizards.csv"))
 
 ![data lizard](D:/kuliah/semester 3/visualisasi data/dataviz_ggplot/images.png)
 
-## 3.2 Mengolah data total_length dan weight 
+## 3.2 Mengolah data total_length dan weight menggunakan plot point
 karna kita akan menggabungkan dua kolom maka kita buat, x = total_length dan y = weight 
+plot point adalah  Scatterplot biasa di mana setiap titik data diplot di koordinat sebenarnya berdasarkan nilai variabel.
 
 ```{r}
 library(ggplot2) 
-
-#membuat plot titik
 ggplot(lizards, aes(x = total_length, y = weight)) + 
   geom_point() +
-  
-#menambahkan judul plot dan sumbu 
+  labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
+```
+
+
+## 3.3 Mengolah data total_length dan weight menggunakan plot jitter
+ plot jitter adalah Scatterplot yang memindahkan titik data sedikit secara acak (baik secara horizontal, vertikal, atau keduanya) untuk mengurangi tumpang tindih
+```{r}
+library(ggplot2) 
+ggplot(lizards, aes(x = total_length, y = common_name)) + 
+  geom_jitter() +
+  labs(title = "Plot titik lizard" , x = "total_length", y = "common_name") + theme_classic()
+```
+
+## 3.4 Mengolah data count total_length 
+karna kita akan menghitung frekuensi nilai dalam interval tertentu yaitu count maka, kita gunakan grafik histogram/batang agar mudah dipahami.
+```{r}
+library(ggplot2) 
+ggplot(data =lizards, aes(x = total_length)) + 
+  geom_histogram() +
+  labs(title = "Plot titik lizard" , x = "total_length") + theme_classic()
+
+```
+
+
+## 3.4 Mengolah data count commond_name
+karna command_name berisi kategorikal maka kita gunakan bar char.
+```{r}
+library(ggplot2) 
+ggplot(lizards, aes(y = common_name)) + 
+  geom_bar() +
+  labs(title = "Plot titik lizard" ,  y = "common_name") + theme_classic()
+```
+
+## 3.5 Mengolah data count weight dan menggatur colour
+kita beri warna coral untuk grafik dan darkorange untuk titiknya, kita gunakan linetype untuk mengganti garis ke titik-titiknya.
+```{r}
+suppressWarnings(
+  ggplot(data = lizards, aes(x = weight)) +
+    geom_histogram(fill = "coral", color = "darkorange4", size = 2, linetype = "dotted", binwidth = 5) +
+    labs(title = "Plot titik lizard", x = "weight") +
+    theme_classic()
+)
+```
+
+
+
+## 3.6 Memberi warna dan shape plot point
+untuk shapenya menggunakan kode angka, misal shape = 20 itu bentuk belah ketupat.
+```{r}
+library(ggplot2) 
+ggplot(lizards, aes(x = total_length, y = weight)) + 
+  geom_point(shape = 20,colour = "deepskyblue4") +
+  labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
+```
+
+
+
+## 3.7 Memberi warna data dengan kategori tertentu.
+sumbu x = total lenght dan y = weight, untuk warnanya di kategorikan berdasarkan common_name dan sizenya berdasarkan total_length
+```{r}
+library(ggplot2) 
+ggplot(lizards, aes(x = total_length, y = weight,)) + 
+  geom_point(aes(colour = common_name,size= total_length)) +
   labs(title = "Plot titik" , x = "total_length", y = "weight") + theme_classic()
 
 ```
 
 
 
-
-# R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-library(readr)
-iris <- read_csv("iris.csv")
-```
-
-```{r}
-View(iris)
-```
-
-
-```{r}
-print ("hallo word")
-```
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-# Referensi
