@@ -139,10 +139,10 @@ ggplot(lizards, aes(x = total_length, y = common_name)) +
 ## 3.4 Mengolah data count total_length 
 karna kita akan menghitung frekuensi nilai dalam interval tertentu yaitu count maka, kita gunakan grafik histogram/batang agar mudah dipahami.
 ```{r}
-library(ggplot2) 
-ggplot(data =lizards, aes(x = total_length)) + 
-  geom_histogram() +
-  labs(title = "Plot titik lizard" , x = "total_length") + theme_classic()
+ggplot(data = lizards, aes(x = total_length)) + 
+  geom_histogram(binwidth = 5) + # Sesuaikan binwidth
+  labs(title = "Plot titik lizard", x = "Total Length") + 
+  theme_classic()
 
 ```
 
