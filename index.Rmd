@@ -191,4 +191,83 @@ ggplot(lizards, aes(x = total_length, y = weight,)) +
 ```
 
 
+# 4. Animasi grafik menggunakan gganimate
+## 4.1 install packages
+```{r}
+library(gapminder)
+library(ggplot2)
+library(gganimate)
+```
+## 4.2 import data
+```{r}
+library(gapminder)
+data=gapminder
+data
+```
+## 4.3 membuat plot
+```{r}
+library(gapminder)
+library(ggplot2)
+
+gapminder_plot <- ggplot(
+  gapminder, 
+  aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(shape = 20, colour = "deepskyblue4") + 
+  scale_x_log10() +
+  labs(title = "Plot Titik", x = "GDP per Capita", y = "Life Expectancy") +
+  theme_classic()
+
+
+gapminder_plot
+```
+
+
+
+
+## 4.4 menambahkan elemen 
+- size = pop, colour = continent
+- scale_colour_viridis_d() 
+```{r}
+# Load libraries
+library(gapminder)
+library(ggplot2)
+
+# Buat plot dengan data gapminder
+gapminder_plot <- ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(aes(size = pop, colour = continent)) + 
+  scale_x_log10() +
+  labs(title = "Plot Titik", x = "GDP per Capita", y = "Life Expectancy") +
+  theme_classic()
+
+# Tampilkan plot
+gapminder_plot
+
+```
+
+## 4.5 menambahkaan transisi
+harus menggunakan fungsi time
+```{r}
+gapminder_point <- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)  
+) +
+  geom_point(alpha = 0.6) + 
+  scale_x_log10() + 
+  scale_color_viridis_d( option = "D")
+  labs(
+    title = "Plot Titik Berdasarkan GDP per Kapita dan Harapan Hidup",
+    x = "GDP per Kapita",
+    y = "Harapan Hidup"
+  )
+
+animated_gapminder <- gapminder_point +
+transition_time(year) + labs(title = "gapminder animated")
+
+animate(animated_gapminder, nframes = 50, renderer = gifski_renderer("animated_gapminder.gif"))
+```
+
+
+
+
+
 
