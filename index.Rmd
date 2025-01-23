@@ -267,37 +267,6 @@ animate(animated_gapminder, nframes = 50, renderer = gifski_renderer("animated_g
 ```
 
 ## 4.6 menambahkan benua
-```{r}
-library(gganimate)
-gapminder_plot + facet_wrap(~continent) +
-  transition_time(year) +
-  labs(title = "Year: {frame_time}")
-```
-
-
-```{r}
-library(gapminder)
-library(ggplot2)
-gapminder_plot <- ggplot(
-  gapminder, 
-  aes(x = gdpPercap, y=lifeExp)
-  ) +
-  geom_point(alpha = 0.6) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Life expectancy")
-gapminder_plot
-```
-```{r}
-gapminder_plot <- ggplot(
-  gapminder, 
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = continent)
-  ) +
-  geom_point(alpha = 0.6) +
-  scale_x_log10() +
-  scale_color_viridis_d(option = "viridis") +
-  labs(x = "GDP per capita", y = "Life expectancy")
-gapminder_plot
-```
 
 ```{r}
 # Membuat plot dasar
