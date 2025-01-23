@@ -308,3 +308,13 @@ gapminder_plot +
   shadow_wake(wake_length = 0.1, alpha = FALSE)
 ```
 
+
+
+## 4.9 menambahkan jejak data
+
+```{r}
+gapminder_plot + transition_time(year) + facet_wrap(~continent) +
+  labs(title = "Year: {frame_time}") +
+  shadow_mark(alpha = 0.3, size = 0.5)
+```
+
