@@ -278,18 +278,33 @@ gapminder_plot + transition_time(year) + # Buat animasi berdasarkan tahun
 
 ## 4.6 menambahkan benua
 
+
 ```{r}
 library(gganimate)
 gapminder_plot + facet_wrap(~continent) +
   transition_time(year) +
   labs(title = "Year: {frame_time}")
 ```
-## 4.7 menambah  gerakan
+
+
+
+## 4.7 menambahkan gerakan
 
 ```{r}
 gapminder_plot + facet_wrap(~continent) +
   transition_time(year) +
   labs(title = "Year: {frame_time}") +
   view_follow(fixed_y = TRUE)
+```
+
+
+
+## 4.8 menambah bayangan
+
+```{r}
+gapminder_plot + 
+  transition_time(year) + facet_wrap(~continent) +
+  labs(title = "Year: {frame_time}") +
+  shadow_wake(wake_length = 0.1, alpha = FALSE)
 ```
 
