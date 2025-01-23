@@ -284,7 +284,12 @@ gapminder_plot + facet_wrap(~continent) +
   transition_time(year) +
   labs(title = "Year: {frame_time}")
 ```
+## 4.7 menambah  gerakan
 
-
-
+```{r}
+gapminder_plot + facet_wrap(~continent) +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+  view_follow(fixed_y = TRUE)
+```
 
