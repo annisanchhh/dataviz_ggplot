@@ -220,6 +220,18 @@ gapminder_plot <- ggplot(
 
 gapminder_plot
 ```
+```{r}
+library(gapminder)
+library(ggplot2)
+gapminder_plot <- ggplot(
+  gapminder, 
+  aes(x = gdpPercap, y=lifeExp)
+  ) +
+  geom_point(alpha = 0.6) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+gapminder_plot
+```
 
 
 
@@ -243,52 +255,36 @@ gapminder_plot <- ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
 gapminder_plot
 
 ```
+```{r}
+gapminder_plot <- ggplot(
+  gapminder, 
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = continent)
+  ) +
+  geom_point(alpha = 0.6) +
+  scale_x_log10() +
+  scale_color_viridis_d(option = "viridis") +
+  labs(x = "GDP per capita", y = "Life expectancy")
+gapminder_plot
+```
 
 ## 4.5 menambahkaan transisi
 harus menggunakan fungsi time
 ```{r}
-gapminder_point <- ggplot(
-  gapminder,
-  aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)  
-) +
-  geom_point(alpha = 0.6) + 
-  scale_x_log10() + 
-  scale_color_viridis_d( option = "D")
-  labs(
-    title = "Plot Titik Berdasarkan GDP per Kapita dan Harapan Hidup",
-    x = "GDP per Kapita",
-    y = "Harapan Hidup"
-  )
-
-animated_gapminder <- gapminder_point +
-transition_time(year) + labs(title = "gapminder animated")
-
-animate(animated_gapminder, nframes = 50, renderer = gifski_renderer("animated_gapminder.gif"))
+library(gganimate) #transition time
+# Tambahkan animasi menggunakan gganimate
+gapminder_plot + transition_time(year) + # Buat animasi berdasarkan tahun
+  labs(title = "Year: {frame_time}") # Tampilkan tahun pada setiap frame
 ```
 
 ## 4.6 menambahkan benua
 
 ```{r}
-# Membuat plot dasar
-gapminder_plot <- ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
-  geom_point(alpha = 0.7, show.legend = FALSE) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Life expectancy")
-
-# Membuat animasi
-gapminder_animation <- gapminder_plot +
-  facet_wrap(~continent) +
+library(gganimate)
+gapminder_plot + facet_wrap(~continent) +
   transition_time(year) +
   labs(title = "Year: {frame_time}")
-
-# Simpan animasi ke file GIF
-anim_save("gapmander_facet_animation.gif", animation = gapminder_animation)
-
 ```
-```{r}
-ggsave("images.png")
 
-```
 
 
 
